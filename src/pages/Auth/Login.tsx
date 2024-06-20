@@ -1,6 +1,7 @@
 import LoginForm from "@/components/LoginForm";
-import MemoLogo from "@/icons/Logo";
+
 import signIn from "../../assets/images/sign-in.svg";
+import MemoLogo from "@/icons/Logo";
 
 const Login = () => {
   return (
@@ -13,7 +14,7 @@ const Login = () => {
         <section className="w-full p-6 sm:w-1/2">
           <div className="space-y-2">
             <h1 className="sm:text-4xl font-bold text-[#213F7D]">Welcome!</h1>
-            <p className="text-[#545F7D] text-sm sm:text-base">
+            <p className="text-[#545F7D] font-[400] text-sm sm:text-base">
               Enter details to login.
             </p>
           </div>

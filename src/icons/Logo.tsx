@@ -1,8 +1,28 @@
 import * as React from "react";
 
-function Logo(props) {
+interface LogoProps {
+  width?: number;
+  height?: number;
+  viewBox?: string;
+  fill?: string;
+  className?: string;
+}
+const Logo: React.FC<LogoProps> = ({
+  width,
+  height,
+  viewBox,
+  fill,
+  className,
+  ...props
+}) => {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 174 36" fill="none" {...props}>
+    <svg
+      width={width ?? "1em"}
+      height={height ?? "1em"}
+      viewBox={viewBox ?? "0 0 174 36"}
+      fill={fill ?? "none"}
+      className={className}
+      {...props}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -27,7 +47,7 @@ function Logo(props) {
       </defs>
     </svg>
   );
-}
+};
 
 const MemoLogo = React.memo(Logo);
 export default MemoLogo;
