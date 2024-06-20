@@ -13,8 +13,8 @@ const Login = () => {
         </section>
         <section className="w-full p-6 sm:w-1/2">
           <div className="space-y-2">
-            <h1 className="sm:text-4xl font-bold text-[#213F7D]">Welcome!</h1>
-            <p className="text-[#545F7D] font-[400] text-sm sm:text-base">
+            <h1 className="sm:text-4xl font-[700] text-[#213F7D]">Welcome!</h1>
+            <p className="text-[#545F7D] font-[300] text-sm sm:text-base">
               Enter details to login.
             </p>
           </div>

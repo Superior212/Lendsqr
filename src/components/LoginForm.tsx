@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,11 +14,19 @@ import { Control, FieldPath, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 
+// Define the validation schema
 const formSchema = z.object({
-  email: z.string().min(2).max(50),
-  password: z.string().min(5).max(50),
+  email: z
+    .string()
+    .email("Invalid email address")
+    .max(50, "Maximum length is 50 characters"),
+  password: z
+    .string()
+    .min(5, "Minimum length is 5 characters")
+    .max(50, "Maximum length is 50 characters"),
 });
 
+// LoginForm component
 const LoginForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -30,6 +39,7 @@ const LoginForm = () => {
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log(values);
   };
+
   return (
     <div>
       <Form {...form}>
@@ -46,8 +56,8 @@ const LoginForm = () => {
             inputType="password"
             formControl={form.control}
           />
-          <div className="mt-6  text-sm text-[#39CDCC]">
-            <Link to="#" className="text-[12px]">
+          <div className="mt-6 text-sm text-[#39CDCC]">
+            <Link to="/forgot-password" className="font-[500] text-[11px]">
               FORGOT PASSWORD?
             </Link>
           </div>
@@ -62,6 +72,7 @@ const LoginForm = () => {
   );
 };
 
+// SigninForm component props
 type SigninFormProps = {
   name: FieldPath<z.infer<typeof formSchema>>;
   placeholder: string;
@@ -69,6 +80,8 @@ type SigninFormProps = {
   inputType: string;
   formControl: Control<z.infer<typeof formSchema>>;
 };
+
+// SigninForm component
 const SigninForm = ({
   name,
   formControl,
@@ -76,6 +89,12 @@ const SigninForm = ({
   description,
   inputType,
 }: SigninFormProps) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+
   return (
     <FormField
       control={formControl}
@@ -83,11 +102,23 @@ const SigninForm = ({
       render={({ field }) => (
         <FormItem>
           <FormControl>
-            <Input
-              placeholder={placeholder}
-              type={inputType || "text"}
-              {...field}
-            />
+            <div className="relative">
+              <Input
+                placeholder={placeholder}
+                type={
+                  showPassword && inputType === "password" ? "text" : inputType
+                }
+                {...field}
+              />
+              {inputType === "password" && (
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm text-[#39CDCC] leading-5">
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              )}
+            </div>
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />
