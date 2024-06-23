@@ -14,40 +14,46 @@ const SelectOrganization = () => {
         <Select>
           <SelectTrigger
             id="model"
-            className="items-start text-[#213F7D] flex [&_[data-description]]:hidden">
+            className="items-start text-[#213F7D] dark:text-white flex [&_[data-description]]:hidden">
             <MemoOrganization className="h-5 w-5" />
             <SelectValue
-              className="!text-[#213F7D]"
+              className="!text-[#213F7D] "
               placeholder="Switch Organization"
             />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="genesis">
-              <div className="flex items-start gap-3 text-[#213F7D]">
+              <div className="flex items-start gap-3 dark:text-white text-[#213F7D]">
                 <div className="grid gap-0.5">
                   <p>
                     Neural{" "}
-                    <span className="font-medium text-[#213F7D]">Genesis</span>
+                    <span className="font-medium dark:text-white text-[#213F7D]">
+                      Genesis
+                    </span>
                   </p>
                 </div>
               </div>
             </SelectItem>
             <SelectItem value="explorer">
-              <div className="flex items-start gap-3 text-[#213F7D]">
+              <div className="flex items-start gap-3 dark:text-white text-[#213F7D]">
                 <div className="grid gap-0.5">
                   <p>
                     Neural{" "}
-                    <span className="font-medium text-[#213F7D]">Explorer</span>
+                    <span className="font-medium dark:text-white text-[#213F7D]">
+                      Explorer
+                    </span>
                   </p>
                 </div>
               </div>
             </SelectItem>
             <SelectItem value="quantum">
-              <div className="flex items-start gap-3 text-[#213F7D]">
+              <div className="flex items-start gap-3 dark:text-white text-[#213F7D]">
                 <div className="grid gap-0.5">
                   <p>
                     Neural{" "}
-                    <span className="font-medium text-[#213F7D]">Quantum</span>
+                    <span className="font-medium dark:text-white text-[#213F7D]">
+                      Quantum
+                    </span>
                   </p>
                 </div>
               </div>

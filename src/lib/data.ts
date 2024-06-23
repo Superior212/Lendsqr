@@ -22,7 +22,7 @@ import MemoWhitelist from "@/icons/Whitelist";
 
 export const Dashboard = [
   {
-    to: "/",
+    to: "/user",
     icon: MemoHome,
     label: "Dashboard",
   },

@@ -2,7 +2,7 @@ import * as React from "react";
 
 function User(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 16 13" fill="none" {...props}>
+    <svg width="1em" height="1em" viewBox="0 0 16 13" fill="#213F7D" {...props}>
       <path
         opacity={0.4}
         d="M12 6.4a2.4 2.4 0 100-4.8 2.4 2.4 0 000 4.8zm1.2.8h-.095c-.348.12-.715.2-1.105.2s-.758-.08-1.105-.2H10.8c-.51 0-.98.148-1.393.385.61.658.993 1.53.993 2.495v.96c0 .055-.013.108-.015.16H14.8A1.2 1.2 0 0016 10a2.8 2.8 0 00-2.8-2.8z"

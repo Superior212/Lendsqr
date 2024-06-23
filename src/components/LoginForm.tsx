@@ -11,10 +11,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Control, FieldPath, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 
-// Define the validation schema
 const formSchema = z.object({
   email: z
     .string()
@@ -26,8 +25,8 @@ const formSchema = z.object({
     .max(50, "Maximum length is 50 characters"),
 });
 
-// LoginForm component
 const LoginForm = () => {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -62,6 +61,7 @@ const LoginForm = () => {
             </Link>
           </div>
           <Button
+            onClick={() => navigate("/user")}
             className="bg-[#39CDCC] hover:bg-[#213F7D] w-full"
             type="submit">
             LOG IN
