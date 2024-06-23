@@ -15,6 +15,9 @@ font-face {
   font-optical-sizing: auto;
 }
 
+.hsection {
+  @apply px-5 py-2 max-w-[68rem] mx-auto;
+}
 body {
   font-family: "AvenirNext", sans-serif;
 }

@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Auth/Login";
 import Layout from "./Layouts/Layout";
+import User from "./pages/User";
 
 const App = () => {
   return (
@@ -8,7 +9,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/user" element={<Layout />}>
-          {/* <Route path="home" element={<Dashboard />} /> */}
+          <Route path="home" element={<User />} />
           {/* <Route path="" element={<Navigate to="/user/home" />} /> */}
           {/* <Route path="status" element={<CheckAdmissionStatus />} /> */}
 
