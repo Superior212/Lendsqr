@@ -61,7 +61,7 @@ const LoginForm = () => {
             </Link>
           </div>
           <Button
-            onClick={() => navigate("/user")}
+            onClick={() => navigate("/user/home")}
             className="bg-[#39CDCC] hover:bg-[#213F7D] w-full"
             type="submit">
             LOG IN
