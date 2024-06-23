@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Link } from "react-router-dom";
 import { Badge } from "./ui/badge";
+import profile from "../assets/images/profile.svg";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,14 +14,20 @@ import {
 } from "./ui/dropdown-menu";
 import { ModeToggle } from "./mode-toggle";
 import { Dashboard, CUSTOMERS, BUSINESSES, SETTINGS } from "@/lib/data";
-import { Bell, Menu } from "lucide-react";
+import { Bell, Menu, Search } from "lucide-react";
+import MemoDropdown from "@/icons/Dropdown";
+import { Input } from "./ui/input";
 
 type NavItem = {
   to: string;
   icon:
     | React.ComponentType<React.SVGProps<SVGSVGElement>>
-    | React.MemoExoticComponent<React.ComponentType<React.SVGProps<SVGSVGElement>>>
-    | React.MemoExoticComponent<(props: React.SVGProps<SVGSVGElement>) => JSX.Element>;
+    | React.MemoExoticComponent<
+        React.ComponentType<React.SVGProps<SVGSVGElement>>
+      >
+    | React.MemoExoticComponent<
+        (props: React.SVGProps<SVGSVGElement>) => JSX.Element
+      >;
   label: string;
 };
 
@@ -76,9 +83,28 @@ const DashHeader: React.FC = () => {
             </nav>
           </SheetContent>
         </Sheet>
-        <div className="w-full flex-1"></div>
-        <div className="relative">
-          <Bell className="h-8 w-8" />
+        <div className="w-full flex-1 mx-6">
+          <form>
+            <div className="flex w-[55%] items-center border rounded-md overflow-hidden">
+              <Input
+                type="search"
+                placeholder="Search for anything..."
+                className="flex-1 appearance-none outline-none border-none bg-background pl-4 py-2"
+              />
+              <Button className="bg-[#39CDCC] hover:bg-[#39CDCC] rounded-l-none px-6 py-[1.36rem]">
+                <Search className="text-white h-4 w-4" />
+              </Button>
+            </div>
+          </form>
+        </div>
+
+        <Link
+          className="underline underline-offset-2 text-[#213F7D] dark:text-white text-sm mx-4"
+          to={"#"}>
+          Docs
+        </Link>
+        <div className="relative  mx-4">
+          <Bell className="h-8 w-8 " />
           <Badge className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white text-xs">
             2
           </Badge>
@@ -89,14 +115,19 @@ const DashHeader: React.FC = () => {
             <div className="flex items-center gap-2">
               <Button variant="secondary" size="icon" className="rounded-full">
                 <span className="sr-only">Toggle user menu</span>
+                <img src={profile} className="rounded-full" alt="" />
               </Button>
-              <div className="cursor-pointer md:block hidden">
-                <h1 className="text-base font-bold">Tappi</h1>
-                <p className="text-sm font-light">Program Co-ordinator</p>
+              <div className="cursor-pointer   md:flex items-center hidden">
+                <h1 className="text-base font-thin text-[#213F7D] dark:text-white">
+                  Adedeji
+                </h1>
+                <MemoDropdown className="h-5 w-5" />
               </div>
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent
+            className="text-[#213F7D] dark:text-white"
+            align="end">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Settings</DropdownMenuItem>
@@ -105,9 +136,6 @@ const DashHeader: React.FC = () => {
             <DropdownMenuItem>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button className="bg-Primary-50 gap-2 hidden md:flex text-Primary-full hover:bg-Primary-hover hover:text-white transition duration-500 ease-in-out">
-          Connect Wallet
-        </Button>
 
         <ModeToggle />
       </header>
