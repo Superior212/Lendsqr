@@ -83,7 +83,7 @@ const DashHeader: React.FC = () => {
             </nav>
           </SheetContent>
         </Sheet>
-        <div className="w-full flex-1 mx-6">
+        <div className="w-full flex-1 mx-6 hidden sm:block">
           <form>
             <div className="flex w-[55%] items-center border rounded-md overflow-hidden">
               <Input
