@@ -43,7 +43,7 @@ export const Dashboard = [
 ];
 export const CUSTOMERS = [
   {
-   to: "#/user/home",
+   to: "/user/home",
     icon: MemoUser,
     label: "Users",
   },
