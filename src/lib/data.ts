@@ -20,6 +20,20 @@ import MemoTransactions from "@/icons/Transactions";
 import MemoUser from "@/icons/User";
 import MemoWhitelist from "@/icons/Whitelist";
 
+
+type UserStatus = "Active" | "Pending" | "Blacklisted" | "Inactive";
+
+interface User {
+  org: string;
+  username: string;
+  email: string;
+  phone: string;
+  date: string;
+  status: UserStatus;
+}
+
+
+
 export const Dashboard = [
   {
     to: "/user",
@@ -135,7 +149,7 @@ export const SETTINGS = [
   },
 ];
 
-export const userList = [
+export const userList: User[] = [
   {
     org: "Lendsqr",
     username: "Adedeji",

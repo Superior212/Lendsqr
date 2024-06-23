@@ -42,7 +42,7 @@ const getBadgeClass = (status: UserStatus) => {
 };
 
 export default function UserTable() {
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   const handleMoreIconClick = (user: User) => {
     setSelectedUser(user);
@@ -73,7 +73,7 @@ export default function UserTable() {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {userList.map((row, index) => (
+          {userList.map((row: User, index: number) => (
             <tr key={index}>
               <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                 {row.org}
