@@ -3,20 +3,18 @@ import { Badge } from "@/components/ui/badge";
 import MemoFilterIcon from "@/icons/FilterIcon";
 import MemoMoreIcon from "@/icons/MoreIcon";
 import { userList } from "@/lib/data";
-import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { Link } from "react-router-dom";
 import MemoViewIcon from "@/icons/ViewIcon";
 import MemoBlaclistIcon from "@/icons/BlaclistIcon";
 import MemoActivateIcon from "@/icons/ActivateIcon";
 
-const getBadgeClass = (status) => {
+const getBadgeClass = (status: string) => {
   switch (status) {
     case "Active":
       return "bg-green-100 text-[#39CD62]";
@@ -34,7 +32,7 @@ const getBadgeClass = (status) => {
 export default function UserTable() {
   const [selectedUser, setSelectedUser] = useState(null);
 
-  const handleMoreIconClick = (user) => {
+  const handleMoreIconClick = (user: UserType) => {
     setSelectedUser(user);
   };
 
