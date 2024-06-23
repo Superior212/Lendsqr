@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import MemoFilterIcon from "@/icons/FilterIcon";
 import MemoMoreIcon from "@/icons/MoreIcon";
 import { userList } from "@/lib/data";
+
 import {
   Popover,
   PopoverContent,
@@ -14,7 +15,18 @@ import MemoViewIcon from "@/icons/ViewIcon";
 import MemoBlaclistIcon from "@/icons/BlaclistIcon";
 import MemoActivateIcon from "@/icons/ActivateIcon";
 
-const getBadgeClass = (status: string) => {
+type UserStatus = "Active" | "Pending" | "Blacklisted" | "Inactive";
+
+interface User {
+  org: string;
+  username: string;
+  email: string;
+  phone: string;
+  date: string;
+  status: UserStatus;
+}
+
+const getBadgeClass = (status: UserStatus) => {
   switch (status) {
     case "Active":
       return "bg-green-100 text-[#39CD62]";
@@ -32,7 +44,7 @@ const getBadgeClass = (status: string) => {
 export default function UserTable() {
   const [selectedUser, setSelectedUser] = useState(null);
 
-  const handleMoreIconClick = (user: UserType) => {
+  const handleMoreIconClick = (user: User) => {
     setSelectedUser(user);
   };
 
@@ -81,7 +93,7 @@ export default function UserTable() {
               <td className="px-2 py-4 whitespace-nowrap text-sm">
                 <Badge
                   className={`hover:bg-transparent hover:text-inherit ${getBadgeClass(
-                    row.status
+                    row.status as UserStatus
                   )}`}>
                   {row.status}
                 </Badge>
