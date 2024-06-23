@@ -19,9 +19,8 @@ type NavItem = {
   to: string;
   icon:
     | React.ComponentType<React.SVGProps<SVGSVGElement>>
-    | React.MemoExoticComponent<
-        React.ComponentType<React.SVGProps<SVGSVGElement>>
-      >;
+    | React.MemoExoticComponent<React.ComponentType<React.SVGProps<SVGSVGElement>>>
+    | React.MemoExoticComponent<(props: React.SVGProps<SVGSVGElement>) => JSX.Element>;
   label: string;
 };
 
