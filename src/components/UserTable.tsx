@@ -60,7 +60,6 @@ export default function UserTable() {
               "Phone Number",
               "Date Joined",
               "Status",
-              "Actions",
             ].map((header) => (
               <th
                 key={header}
