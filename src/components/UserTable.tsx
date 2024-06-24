@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import MemoFilterIcon from "@/icons/FilterIcon";
 import MemoMoreIcon from "@/icons/MoreIcon";
-import { userList } from "@/lib/data";
 
 import {
   Popover,
@@ -26,16 +25,25 @@ import {
 } from "./ui/select";
 
 import { Datte } from "./Date";
+import { users } from "@/lib/users";
 
 type UserStatus = "Active" | "Pending" | "Blacklisted" | "Inactive";
-
+interface PersonalInfo {
+  full_name: string;
+  phone_number: string;
+  email_address: string;
+  bvn: string;
+  gender: string;
+  marital_status: string;
+  children: number;
+  type_of_residence: string;
+}
 interface User {
   org: string;
   username: string;
-  email: string;
-  phone: string;
-  date: string;
+  personal_info: PersonalInfo;
   status: UserStatus;
+  date_joined: string;
 }
 
 const getBadgeClass = (status: UserStatus) => {
@@ -168,7 +176,7 @@ export default function UserTable() {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {userList.map((row: User, index: number) => (
+          {users.map((row: User, index: number) => (
             <tr key={index}>
               <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                 {row.org}
@@ -177,13 +185,13 @@ export default function UserTable() {
                 {row.username}
               </td>
               <td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500">
-                {row.email}
+                {row.personal_info.email_address}
               </td>
               <td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500">
-                {row.phone}
+                {row.personal_info.phone_number}
               </td>
               <td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500">
-                {row.date}
+                {row.date_joined}
               </td>
               <td className="px-2 py-4 whitespace-nowrap text-sm">
                 <Badge
