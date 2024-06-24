@@ -28,9 +28,8 @@ import {
   PaginationContent,
   PaginationItem,
   PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
 } from "@/components/ui/pagination";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type UserStatus = "Active" | "Pending" | "Blacklisted" | "Inactive";
 interface PersonalInfo {
@@ -287,11 +286,14 @@ export default function UserTable() {
           <Pagination>
             <PaginationContent>
               <PaginationItem>
-                <PaginationPrevious
+                <PaginationLink
                   href="#"
                   onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                />
+                  className={
+                    currentPage === 1 ? "text-gray-400 cursor-not-allowed" : ""
+                  }>
+                  <ChevronLeft className="h-4 w-4" />
+                </PaginationLink>
               </PaginationItem>
               {Array.from({ length: totalPages }, (_, index) => (
                 <PaginationItem key={index}>
@@ -304,11 +306,16 @@ export default function UserTable() {
                 </PaginationItem>
               ))}
               <PaginationItem>
-                <PaginationNext
+                <PaginationLink
                   href="#"
                   onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                />
+                  className={
+                    currentPage === totalPages
+                      ? "text-gray-400 cursor-not-allowed"
+                      : ""
+                  }>
+                  <ChevronRight className="h-4 w-4" />
+                </PaginationLink>
               </PaginationItem>
             </PaginationContent>
           </Pagination>
