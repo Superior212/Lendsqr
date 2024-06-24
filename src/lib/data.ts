@@ -45,12 +45,12 @@ export const CUSTOMERS = [
     label: "Users",
   },
   {
-    to: "Guarantors",
+    to: "guarantors",
     icon: MemoGuarantors,
     label: "Guarantors",
   },
   {
-    to: "Loans",
+    to: "loans",
     icon: MemoLoans,
     label: "Loans",
   },
