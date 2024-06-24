@@ -237,7 +237,7 @@ export default function UserTable() {
                         <div className="flex flex-col space-y-2">
                           <Link
                             className="cursor-pointer flex items-center gap-2 text-sm font-thin text-[#545F7D]"
-                            to={"#"}>
+                            to="/user/profile">
                             <MemoViewIcon className="h-5 w-5 text-gray-400" />
                             View Details
                           </Link>

@@ -2,17 +2,22 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Auth/Login";
 import Layout from "./Layouts/Layout";
 import User from "./pages/User";
+import Guarantors from "./pages/Guarantors";
+import Loans from "./pages/Loans";
+import UserProfile from "./pages/UserProfile";
 
 const App = () => {
   return (
     <div>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/user" element={<Layout />}>
+        <Route path="user" element={<Layout />}>
           <Route path="home" element={<User />} />
-          {/* <Route path="" element={<Navigate to="/user/home" />} /> */}
-          {/* <Route path="status" element={<CheckAdmissionStatus />} /> */}
+          <Route path="profile" element={<UserProfile />} />
 
+          {/* <Route path="" element={<Navigate to="/user/home" />} /> */}
+          <Route path="guarantors" element={<Guarantors />} />
+          <Route path="loans  " element={<Loans />} />
           {/* courses  */}
 
           {/* <Route path="apply" element={<CoursesHome />} />

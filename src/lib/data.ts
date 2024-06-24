@@ -20,7 +20,6 @@ import MemoTransactions from "@/icons/Transactions";
 import MemoUser from "@/icons/User";
 import MemoWhitelist from "@/icons/Whitelist";
 
-
 type UserStatus = "Active" | "Pending" | "Blacklisted" | "Inactive";
 
 interface User {
@@ -32,100 +31,98 @@ interface User {
   status: UserStatus;
 }
 
-
-
 export const Dashboard = [
   {
-   to: "#/user",
+    to: "#/user",
     icon: MemoHome,
     label: "Dashboard",
   },
 ];
 export const CUSTOMERS = [
   {
-   to: "/user/home",
+    to: "/user/home",
     icon: MemoUser,
     label: "Users",
   },
   {
-   to: "#Guarantors",
+    to: "Guarantors",
     icon: MemoGuarantors,
     label: "Guarantors",
   },
   {
-   to: "#Loans",
+    to: "Loans",
     icon: MemoLoans,
     label: "Loans",
   },
   {
-   to: "#Decision-Models",
+    to: "#Decision-Models",
     icon: MemoDecisionModels,
     label: "Decision Models",
   },
   {
-   to: "#Savings",
+    to: "#Savings",
     icon: MemoSavings,
     label: "Savings",
   },
   {
-   to: "#Loan-Requests",
+    to: "#Loan-Requests",
     icon: MemoLoanRequests,
     label: "Loan Requests",
   },
   {
-   to: "#Whitelist",
+    to: "#Whitelist",
     icon: MemoWhitelist,
     label: "Whitelist",
   },
   {
-   to: "#Karma",
+    to: "#Karma",
     icon: MemoKarma,
     label: "Karma",
   },
 ];
 export const BUSINESSES = [
   {
-   to: "#Organization",
+    to: "#Organization",
     icon: MemoOrganization,
     label: "Organization",
   },
   {
-   to: "#Loan-Products",
+    to: "#Loan-Products",
     icon: MemoLoanProducts,
     label: "Loan Products",
   },
   {
-   to: "#Savings-Products",
+    to: "#Savings-Products",
     icon: MemoSavingsProducts,
     label: "Savings Products",
   },
   {
-   to: "#Fees-and-Charges",
+    to: "#Fees-and-Charges",
     icon: MemoFeesandCharges,
     label: "Fees and Charges",
   },
   {
-   to: "#Transactions",
+    to: "#Transactions",
     icon: MemoTransactions,
     label: "Transactions",
   },
   {
-   to: "#Services",
+    to: "#Services",
     icon: MemoServices,
     label: "Services",
   },
   {
-   to: "#Service-Account",
+    to: "#Service-Account",
     icon: MemoServiceAccount,
     label: "Service Account",
   },
   {
-   to: "#Settlements",
+    to: "#Settlements",
     icon: MemoSettlements,
     label: "Settlements",
   },
   {
-   to: "#Reports",
+    to: "#Reports",
     icon: MemoReports,
     label: "Reports",
   },
@@ -133,17 +130,17 @@ export const BUSINESSES = [
 
 export const SETTINGS = [
   {
-   to: "#Preferences",
+    to: "#Preferences",
     icon: MemoPreferences,
     label: "Preferences",
   },
   {
-   to: "#Audit-Logs",
+    to: "#Audit-Logs",
     icon: MemoAuditLogs,
     label: "Audit Logs",
   },
   {
-   to: "#Fees-and-Pricing",
+    to: "#Fees-and-Pricing",
     icon: MemoFeesandPricing,
     label: "Fees and Pricing",
   },
