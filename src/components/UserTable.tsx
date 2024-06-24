@@ -14,6 +14,18 @@ import { Link } from "react-router-dom";
 import MemoViewIcon from "@/icons/ViewIcon";
 import MemoBlaclistIcon from "@/icons/BlaclistIcon";
 import MemoActivateIcon from "@/icons/ActivateIcon";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "./ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+
+import { Datte } from "./Date";
 
 type UserStatus = "Active" | "Pending" | "Blacklisted" | "Inactive";
 
@@ -65,8 +77,92 @@ export default function UserTable() {
                 key={header}
                 scope="col"
                 className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {header}
-                <MemoFilterIcon className="cursor-pointer inline h-4 w-4 ml-1" />
+                <div className="flex items-center">
+                  {header}
+                  {header !== "Actions" && (
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <div>
+                          <MemoFilterIcon className="cursor-pointer inline h-4 w-4 ml-1" />
+                        </div>
+                      </PopoverTrigger>
+                      <PopoverContent className="p-4 bg-white shadow-md rounded-md w-52">
+                        <div className="flex flex-col space-y-2">
+                          <div className="grid gap-3">
+                            <Label className="text-[#545F7D]">
+                              Organization
+                            </Label>
+                            <Select>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="system">System</SelectItem>
+                                <SelectItem value="user">User</SelectItem>
+                                <SelectItem value="assistant">
+                                  Assistant
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <Input
+                            type="text"
+                            placeholder={`Filter by ${header}`}
+                            className="w-full h-8"
+                          />
+                          <Label className="text-[#545F7D]">Username</Label>
+                          <Input
+                            type="text"
+                            placeholder={`Filter by ${header}`}
+                            className="w-full h-8"
+                          />
+                          <Label className="text-[#545F7D]">Email</Label>
+                          <Input
+                            type="text"
+                            placeholder={`Filter by ${header}`}
+                            className="w-full h-8"
+                          />
+                          <Label className="text-[#545F7D]">Date</Label>
+                          <Datte />
+                          <Label className="text-[#545F7D]">Phone Number</Label>
+                          <Input
+                            type="text"
+                            placeholder={`Filter by ${header}`}
+                            className="w-full h-8"
+                          />
+                          <div className="grid gap-3">
+                            <Label className="text-[#545F7D]">Status</Label>
+                            <Select>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="active">Active</SelectItem>
+                                <SelectItem value="pending">Pending</SelectItem>
+                                <SelectItem value="blacklisted">
+                                  Blacklisted
+                                </SelectItem>
+                                <SelectItem value="inactive">
+                                  Inactive
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <Button className="w-full mt-2" variant="outline">
+                              Reset
+                            </Button>
+                            <Button
+                              className="w-full mt-2 bg-[#39CDCC] text-white"
+                              variant="outline">
+                              Filter
+                            </Button>
+                          </div>
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+                  )}
+                </div>
               </th>
             ))}
           </tr>
@@ -92,7 +188,7 @@ export default function UserTable() {
               <td className="px-2 py-4 whitespace-nowrap text-sm">
                 <Badge
                   className={`hover:bg-transparent hover:text-inherit ${getBadgeClass(
-                    row.status as UserStatus
+                    row.status
                   )}`}>
                   {row.status}
                 </Badge>
@@ -112,19 +208,19 @@ export default function UserTable() {
                       <div className="flex flex-col">
                         <div className="flex flex-col space-y-2">
                           <Link
-                            className=" cursor-pointer flex items-center gap-2 text-sm font-thin text-[#545F7D]"
+                            className="cursor-pointer flex items-center gap-2 text-sm font-thin text-[#545F7D]"
                             to={"#"}>
                             <MemoViewIcon className="h-5 w-5 text-gray-400" />
                             View Details
                           </Link>
                           <Link
-                            className=" cursor-pointer flex items-center gap-2 text-sm font-thin text-[#545F7D]"
+                            className="cursor-pointer flex items-center gap-2 text-sm font-thin text-[#545F7D]"
                             to={"#"}>
                             <MemoBlaclistIcon className="h-5 w-5 text-gray-400" />
                             Blacklist User
                           </Link>
                           <Link
-                            className=" cursor-pointer flex items-center gap-2 text-sm font-thin text-[#545F7D]"
+                            className="cursor-pointer flex items-center gap-2 text-sm font-thin text-[#545F7D]"
                             to={"#"}>
                             <MemoActivateIcon className="h-5 w-5 text-gray-400" />
                             Activate User

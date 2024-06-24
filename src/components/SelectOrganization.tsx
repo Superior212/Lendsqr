@@ -14,7 +14,7 @@ const SelectOrganization = () => {
         <Select>
           <SelectTrigger
             id="model"
-            className="items-start text-[#213F7D] dark:text-white flex [&_[data-description]]:hidden">
+            className="items-start text-[#213F7D] border-none dark:text-white flex [&_[data-description]]:hidden">
             <MemoOrganization className="h-5 w-5" />
             <SelectValue
               className="!text-[#213F7D] "
