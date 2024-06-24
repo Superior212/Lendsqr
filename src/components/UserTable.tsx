@@ -2,13 +2,11 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import MemoFilterIcon from "@/icons/FilterIcon";
 import MemoMoreIcon from "@/icons/MoreIcon";
-
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-
 import { Link } from "react-router-dom";
 import MemoViewIcon from "@/icons/ViewIcon";
 import MemoBlaclistIcon from "@/icons/BlaclistIcon";
@@ -23,9 +21,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-
 import { Datte } from "./Date";
 import { users } from "@/lib/users";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 type UserStatus = "Active" | "Pending" | "Blacklisted" | "Inactive";
 interface PersonalInfo {
@@ -63,10 +68,26 @@ const getBadgeClass = (status: UserStatus) => {
 
 export default function UserTable() {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [usersPerPage, setUsersPerPage] = useState(10);
 
   const handleMoreIconClick = (user: User) => {
     setSelectedUser(user);
   };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleUsersPerPageChange = (value: string) => {
+    setUsersPerPage(Number(value));
+    setCurrentPage(1);
+  };
+
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+  const totalPages = Math.ceil(users.length / usersPerPage);
 
   return (
     <div className="overflow-x-auto">
@@ -176,7 +197,7 @@ export default function UserTable() {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {users.map((row: User, index: number) => (
+          {currentUsers.map((row: User, index: number) => (
             <tr key={index}>
               <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                 {row.org}
@@ -243,6 +264,56 @@ export default function UserTable() {
           ))}
         </tbody>
       </table>
+      <div className="items-center flex justify-between my-4">
+        <div className="flex space-x-2 items-center mb-4">
+          <div className="flex items-center space-x-2">
+            <Label>Showing</Label>
+            <Select onValueChange={handleUsersPerPageChange}>
+              <SelectTrigger>
+                <SelectValue placeholder={`${usersPerPage}`} />
+              </SelectTrigger>
+              <SelectContent>
+                {[10, 20, 30, 40, 50].map((value) => (
+                  <SelectItem key={value} value={String(value)}>
+                    {value}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <p>out of {users.length}</p>
+        </div>
+        <div className="w-[20%] flex justify-end">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  href="#"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                />
+              </PaginationItem>
+              {Array.from({ length: totalPages }, (_, index) => (
+                <PaginationItem key={index}>
+                  <PaginationLink
+                    href="#"
+                    onClick={() => handlePageChange(index + 1)}
+                    isActive={index + 1 === currentPage}>
+                    {index + 1}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+              <PaginationItem>
+                <PaginationNext
+                  href="#"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
+      </div>
     </div>
   );
 }
