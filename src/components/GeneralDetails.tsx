@@ -5,7 +5,7 @@ export default function GeneralDetails() {
     <div className="grid gap-4 bg-white text-[#213F7D] rounded-md p-5 ">
       <h3 className="text-[15px] font-[500]">Personal Information</h3>
 
-      <div className="grid grid-cols-5 text-start gap-x-3 gap-y-6 work-sans text-[#545F7D]">
+      <div className="grid grid-cols-2 sm:grid-cols-5 text-start gap-x-3 gap-y-6 work-sans text-[#545F7D]">
         <div className="flex flex-col items-start space-y-1 text-start">
           <Label htmlFor="fullname" className="font-400 text-[12px] uppercase">
             Full Name
@@ -75,7 +75,7 @@ export default function GeneralDetails() {
       </div>
       <div className="h-[1px] w-full bg-gray-200 my-3" />
       <h3 className="text-[15px] font-[500]">Education and Employment</h3>
-      <div className="grid grid-cols-4 text-start gap-x-3 gap-y-6 work-sans text-[#545F7D]">
+      <div className="grid grid-cols-2 sm:grid-cols-4 text-start gap-x-3 gap-y-6 work-sans text-[#545F7D]">
         <div className="flex flex-col items-start space-y-1 text-start">
           <Label htmlFor="fullname" className="font-400  text-[12px] uppercase">
             level of education
@@ -137,7 +137,7 @@ export default function GeneralDetails() {
       </div>
       <div className="h-[1px] w-full bg-gray-200 my-3" />
       <h3 className="text-[15px] font-[500]">Socials</h3>
-      <div className="grid grid-cols-4 text-start gap-x-3 gap-y-6 work-sans text-[#545F7D]">
+      <div className="grid grid-cols-2 sm:grid-cols-5 text-start gap-x-3 gap-y-6 work-sans text-[#545F7D]">
         <div className="flex flex-col items-start space-y-1 text-start">
           <Label htmlFor="fullname" className="font-400  text-[12px] uppercase">
             Twitter
@@ -163,7 +163,7 @@ export default function GeneralDetails() {
       </div>
       <div className="h-[1px] w-full bg-gray-200 my-3" />
       <h3 className="text-[15px] font-[500]">Guarantor</h3>
-      <div className="grid grid-cols-4 text-start gap-x-3 gap-y-6 work-sans text-[#545F7D]">
+      <div className="grid grid-cols-2 sm:grid-cols-5 text-start gap-x-3 gap-y-6 work-sans text-[#545F7D]">
         <div className="flex flex-col items-start space-y-1 text-start">
           <Label htmlFor="fullname" className="font-400  text-[12px] uppercase">
             full Name
