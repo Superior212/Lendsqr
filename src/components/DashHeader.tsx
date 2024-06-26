@@ -51,7 +51,7 @@ const renderNavItems = (items: NavItem[]) => {
 const DashHeader: React.FC = () => {
   return (
     <>
-      <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[75px] lg:px-6">
+      <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:py-5 lg:h-[75px] lg:px-6">
         <Sheet>
           <SheetTrigger asChild>
             <Button
@@ -103,8 +103,8 @@ const DashHeader: React.FC = () => {
           to={"#"}>
           Docs
         </Link>
-        <div className="relative  mx-4">
-          <Bell className="h-8 w-8 " />
+        <div className="relative  mx-4 ">
+          <Bell className="h-8 w-8 cursor-pointer" />
           <Badge className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white text-xs">
             2
           </Badge>

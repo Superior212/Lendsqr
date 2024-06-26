@@ -13,10 +13,10 @@ export default function Savings() {
     <div className="grid gap-4 p-4">
       <Card>
         <CardHeader>
-          <CardTitle>Savings Accounts</CardTitle>
+          <CardTitle className="text-[#213F7D]">Savings Accounts</CardTitle>
         </CardHeader>
         <CardContent>
-          <Table>
+          <Table className="text-[#545F7D]">
             <TableHeader>
               <TableRow>
                 <TableHead>Account Type</TableHead>

@@ -6,7 +6,7 @@ function ProfileHeader() {
   return (
     <header className="  py-3 ">
       <Link
-        to="#"
+        to="/user/home"
         className="inline-flex items-center rounded-md px-3 py-2 text-sm font-thin text-[#545F7D]">
         <ArrowLeftIcon className="mr-2 h-4 w-4" />
         Back to Users

@@ -13,9 +13,9 @@ export default function Loans() {
     <div className="grid gap-4 p-4">
       <Card>
         <CardHeader>
-          <CardTitle>Active Loans</CardTitle>
+          <CardTitle className="text-[#213F7D]">Active Loans</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="text-[#545F7D]">
           <Table>
             <TableHeader>
               <TableRow>

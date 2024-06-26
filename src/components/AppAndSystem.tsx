@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 
 export default function AppAndSystem() {
   return (
-    <div className="grid gap-4 p-4">
+    <div className="grid gap-4 p-4 text-[#545F7D]">
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-1">
           <Label htmlFor="last-login">Last Login</Label>
