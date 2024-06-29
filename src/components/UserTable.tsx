@@ -30,25 +30,7 @@ import {
   PaginationLink,
 } from "@/components/ui/pagination";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
-type UserStatus = "Active" | "Pending" | "Blacklisted" | "Inactive";
-interface PersonalInfo {
-  full_name: string;
-  phone_number: string;
-  email_address: string;
-  bvn: string;
-  gender: string;
-  marital_status: string;
-  children: number;
-  type_of_residence: string;
-}
-interface User {
-  org: string;
-  username: string;
-  personal_info: PersonalInfo;
-  status: UserStatus;
-  date_joined: string;
-}
+import { User, UserStatus } from "@/types";
 
 const getBadgeClass = (status: UserStatus) => {
   switch (status) {
@@ -69,13 +51,16 @@ export default function UserTable() {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(10);
+  const [showMorePages] = useState(false);
 
   const handleMoreIconClick = (user: User) => {
     setSelectedUser(user);
   };
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
 
   const handleUsersPerPageChange = (value: string) => {
@@ -87,6 +72,82 @@ export default function UserTable() {
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
   const totalPages = Math.ceil(users.length / usersPerPage);
+
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+
+    if (totalPages <= 5 || showMorePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(
+          <PaginationItem key={i}>
+            <PaginationLink
+              href="#"
+              onClick={() => handlePageChange(i)}
+              isActive={i === currentPage}>
+              {i}
+            </PaginationLink>
+          </PaginationItem>
+        );
+      }
+    } else {
+      for (let i = 1; i <= 3; i++) {
+        pageNumbers.push(
+          <PaginationItem key={i}>
+            <PaginationLink
+              href="#"
+              onClick={() => handlePageChange(i)}
+              isActive={i === currentPage}>
+              {i}
+            </PaginationLink>
+          </PaginationItem>
+        );
+      }
+
+      if (currentPage > 48) {
+        pageNumbers.push(
+          <PaginationItem key="ellipsis1">
+            <span className="pagination-ellipsis">...</span>
+          </PaginationItem>
+        );
+      }
+
+      if (currentPage > 3 && currentPage < totalPages - 2) {
+        pageNumbers.push(
+          <PaginationItem key={currentPage}>
+            <PaginationLink
+              href="#"
+              onClick={() => handlePageChange(currentPage)}
+              isActive>
+              {currentPage}
+            </PaginationLink>
+          </PaginationItem>
+        );
+      }
+
+      if (currentPage < totalPages - 3) {
+        pageNumbers.push(
+          <PaginationItem key="ellipsis2">
+            <span className="pagination-ellipsis">...</span>
+          </PaginationItem>
+        );
+      }
+
+      for (let i = totalPages - 1; i <= totalPages; i++) {
+        pageNumbers.push(
+          <PaginationItem key={i}>
+            <PaginationLink
+              href="#"
+              onClick={() => handlePageChange(i)}
+              isActive={i === currentPage}>
+              {i}
+            </PaginationLink>
+          </PaginationItem>
+        );
+      }
+    }
+
+    return pageNumbers;
+  };
 
   return (
     <div className="overflow-x-auto">
@@ -176,15 +237,9 @@ export default function UserTable() {
                               </SelectContent>
                             </Select>
                           </div>
-                          <div className="flex items-center gap-4">
-                            <Button className="w-full mt-2" variant="outline">
-                              Reset
-                            </Button>
-                            <Button
-                              className="w-full mt-2 bg-[#39CDCC] text-white"
-                              variant="outline">
-                              Filter
-                            </Button>
+                          <div className="flex items-center gap-4 justify-between">
+                            <Button variant="outline">Reset</Button>
+                            <Button>Filter</Button>
                           </div>
                         </div>
                       </PopoverContent>
@@ -193,10 +248,15 @@ export default function UserTable() {
                 </div>
               </th>
             ))}
+            <th
+              scope="col"
+              className="relative px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Actions
+            </th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {currentUsers.map((row: User, index: number) => (
+          {currentUsers.map((row, index) => (
             <tr key={index}>
               <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                 {row.org}
@@ -282,7 +342,7 @@ export default function UserTable() {
           </div>
           <p>out of {users.length}</p>
         </div>
-        <div className="w-[20%] flex justify-end">
+        <div className="w-[35%] flex justify-end">
           <Pagination>
             <PaginationContent>
               <PaginationItem>
@@ -295,16 +355,7 @@ export default function UserTable() {
                   <ChevronLeft className="h-4 w-4" />
                 </PaginationLink>
               </PaginationItem>
-              {Array.from({ length: totalPages }, (_, index) => (
-                <PaginationItem key={index}>
-                  <PaginationLink
-                    href="#"
-                    onClick={() => handlePageChange(index + 1)}
-                    isActive={index + 1 === currentPage}>
-                    {index + 1}
-                  </PaginationLink>
-                </PaginationItem>
-              ))}
+              {renderPageNumbers()}
               <PaginationItem>
                 <PaginationLink
                   href="#"
