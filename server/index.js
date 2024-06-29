@@ -17,6 +17,15 @@ app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 // Routes
 app.use('/api', userRoute);
 
+
+// Define Lambda handler function
+exports.handler = async (event, context) => {
+    // Sample Lambda function logic
+    return {
+        statusCode: 200,
+        body: JSON.stringify({ message: 'Hello from Lambda!' }),
+    };
+};
 // Connect to MongoDB
 
 mongoose.connect(URI)
