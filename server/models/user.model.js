@@ -1,15 +1,14 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
 
-    _id: ObjectId,
+const userSchema = new mongoose.Schema({
     org: String,
     username: String,
     personal_info: {
         full_name: String,
-        phone_number: String,
-        email_address: String,
-        bvn: Number,
+        phone_number: { type: String, unique: true },
+        email_address: { type: String, unique: true },
+        bvn: { type: Number, unique: true },
         gender: String,
         marital_status: String,
         children: Number,
