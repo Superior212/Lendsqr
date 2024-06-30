@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import MemoFilterIcon from "@/icons/FilterIcon";
 import MemoMoreIcon from "@/icons/MoreIcon";
+import axios from "axios";
 import {
   Popover,
   PopoverContent,
@@ -22,7 +23,6 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Datte } from "./Date";
-import { users } from "@/lib/users";
 import {
   Pagination,
   PaginationContent,
@@ -47,11 +47,27 @@ const getBadgeClass = (status: UserStatus) => {
   }
 };
 
+const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // getMonth() is zero-based
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
 export default function UserTable() {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(10);
   const [showMorePages] = useState(false);
+  const [userData, setUserData] = useState<User[]>([]);
+  let url = "http://localhost:3000/api/users";
+
+  useEffect(() => {
+    axios.get(url).then((response) => {
+      setUserData(response.data);
+    });
+  }, []);
 
   const handleMoreIconClick = (user: User) => {
     setSelectedUser(user);
@@ -70,8 +86,8 @@ export default function UserTable() {
 
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-  const totalPages = Math.ceil(users.length / usersPerPage);
+  const currentUsers = userData.slice(indexOfFirstUser, indexOfLastUser);
+  const totalPages = Math.ceil(userData.length / usersPerPage);
 
   const renderPageNumbers = () => {
     const pageNumbers = [];
@@ -103,14 +119,6 @@ export default function UserTable() {
         );
       }
 
-      if (currentPage > 48) {
-        pageNumbers.push(
-          <PaginationItem key="ellipsis1">
-            <span className="pagination-ellipsis">...</span>
-          </PaginationItem>
-        );
-      }
-
       if (currentPage > 3 && currentPage < totalPages - 2) {
         pageNumbers.push(
           <PaginationItem key={currentPage}>
@@ -124,7 +132,7 @@ export default function UserTable() {
         );
       }
 
-      if (currentPage < totalPages - 3) {
+      if (currentPage < 48) {
         pageNumbers.push(
           <PaginationItem key="ellipsis2">
             <span className="pagination-ellipsis">...</span>
@@ -132,7 +140,7 @@ export default function UserTable() {
         );
       }
 
-      for (let i = totalPages - 1; i <= totalPages; i++) {
+      for (let i = totalPages - 2; i <= totalPages; i++) {
         pageNumbers.push(
           <PaginationItem key={i}>
             <PaginationLink
@@ -271,7 +279,7 @@ export default function UserTable() {
                 {row.personal_info.phone_number}
               </td>
               <td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500">
-                {row.date_joined}
+                {formatDate(row.date_joined)}
               </td>
               <td className="px-2 py-4 whitespace-nowrap text-sm">
                 <Badge
@@ -340,7 +348,7 @@ export default function UserTable() {
               </SelectContent>
             </Select>
           </div>
-          <p>out of {users.length}</p>
+          <p>out of {userData.length}</p>
         </div>
         <div className="w-[35%] flex justify-end">
           <Pagination>

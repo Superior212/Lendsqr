@@ -55,4 +55,37 @@ const deleteUser = async (req, res) => {
     }
 }
 
-module.exports = { addUser, allUsers, userCount, deleteUser }
+const activeUsers = async (req, res) => {
+    try {
+        const activeUsers = await User.find({ status: 'Active' });
+        const count = await User.countDocuments({ status: 'Active' });
+        res.status(200).json({ count, users: activeUsers });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching active users', error: error.message });
+    }
+}
+
+
+
+const loanUsers = async (req, res) => {
+    try {
+        const usersWithLoans = await User.find({ 'education_and_employment.loan_repayment': { $gt: 0 } });
+        const count = await User.countDocuments({ 'education_and_employment.loan_repayment': { $gt: 0 } });
+        res.status(200).json({ count, users: usersWithLoans });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching users with loans', error: error.message });
+    }
+}
+
+const savingsUsers = async (req, res) => {
+    try {
+        const usersWithSavings = await User.find({ has_savings: true });
+        const count = await User.countDocuments({ has_savings: true });
+        res.status(200).json({ count, users: usersWithSavings });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching users with savings', error: error.message });
+    }
+}
+
+
+module.exports = { addUser, allUsers, userCount, deleteUser, activeUsers, loanUsers, savingsUsers }

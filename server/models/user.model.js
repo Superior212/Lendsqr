@@ -35,7 +35,9 @@ const userSchema = new mongoose.Schema({
         relationship: String
     },
     status: String,
-    date_joined: Date
+    date_joined: Date,
+    has_loan: Boolean,
+    has_savings: Boolean,
 });
 
 const userModel = mongoose.model("User", userSchema);
